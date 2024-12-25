@@ -1,0 +1,73 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Bank {
+private:
+    string name;
+    int accountNo; // Corrected variable name
+    float balance;
+    long long phoneNo; // Changed to long long to accommodate larger phone numbers
+    const float maxWithdrawalLimit = 5000; // Set a maximum withdrawal limit
+
+public:
+    // Function to input account details
+    void inputDetails() {
+        cout << "Enter account holder name: ";
+        cin >> name;
+        cout << "Enter account number: ";
+        cin >> accountNo; // Corrected variable name
+        cout << "Enter account balance: ";
+        cin >> balance;
+        cout << "Enter phone number: ";
+        cin >> phoneNo; // Corrected variable name
+    }
+
+    // Function to set phone number (not necessary in this context)
+    void setPhoneNumber(long long phoneno) {
+        phoneNo = phoneno; // Corrected variable name
+    }
+
+    // Function to deposit amount
+    void depositAmount(float amount) {
+        balance += amount;
+    }
+
+    // Function to withdraw amount with limit check
+    void withdrawAmount(float amount) {
+        if (amount > balance) {
+            cout << "Insufficient balance!" << endl;
+        } else if (amount > maxWithdrawalLimit) {
+            cout << "Withdrawal amount exceeds the maximum limit of " << maxWithdrawalLimit << "!" << endl;
+        } else {
+            balance -= amount;
+            cout << "Withdrawal successful!" << endl;
+        }
+    }
+
+    // Function to display account details
+    void displayDetails() {
+        cout << "Account holder name: " << name << endl;
+        cout << "Account number: " << accountNo << endl; // Corrected variable name
+        cout << "Account balance: " << balance << endl;
+        cout << "Phone number: " << phoneNo << endl; // Corrected variable name
+    }
+};
+
+int main() {
+    Bank b; // Create an instance of the Bank class
+    b.inputDetails(); // Input account details
+    cout << "\nAccount details:\n";
+    b.displayDetails(); // Display account details
+
+    cout << "\nAfter depositing 5000:\n";
+    b.depositAmount(5000); // Deposit amount
+    b.displayDetails(); // Display updated account details
+
+    cout << "\nAttempting to withdraw 1500:\n"; // Exceeds limit
+    b.withdrawAmount(1500); // Attempt to withdraw amount exceeding limit
+    b.displayDetails(); // Display updated account details
+
+
+    return 0;
+}
